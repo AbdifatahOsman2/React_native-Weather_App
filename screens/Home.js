@@ -5,9 +5,12 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 
 export default function Home() {
-  const [location, setLocation] = useState(null);
   const [long, setLong ] = useState(null);
   const [lat, setLat] = useState(null);
+  const [temp, settemp] = useState(null);
+  const [min, setmin] = useState(null);
+  const [max, setmax] = useState(null);
+  const [humidity, sethumidity] = useState(null);
   const [description, setdescription] = useState(null);
 
 
@@ -18,27 +21,30 @@ export default function Home() {
         console.error('Permission to access location was denied');
         return;
       }
-          await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=3616a57498522c3f1df43d6caaa2c964`).then((res) => {
-            console.log(res.data)
-            setdescription(res.data)
-          }).catch(error=>{
-
-          })
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-          setLat(location.coords.latitude)
-          setLong(location.coords.longitude)
-      console.log(description)
+        let location = await Location.getCurrentPositionAsync({});
+        setLat(location.coords.latitude)
+        setLong(location.coords.longitude)
     })();
   }, []);
+
+  async function getData () {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=3616a57498522c3f1df43d6caaa2c964&units=imperial`)
+    console.log(response.data)
+    setdescription(response.data.weather[0].description)
+    settemp(response.data.main.temp)
+    setmin(response.data.main.temp_min)
+    setmax(response.data.main.temp_max)
+    sethumidity(response.data.main.humidity)
+  }
+  getData()
+  console.log()
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
         Home22
       </Text>
-      <Text>{description}</Text>
+      <Text style={styles.text}>{temp}</Text>
       <StatusBar style="auto" />
     </View>
   );

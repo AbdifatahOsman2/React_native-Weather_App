@@ -31,7 +31,7 @@ Second React-native project
 </strong>
 </p>
 <p align="center">
-  <img src="./assets/iPhone 13 Pro Max - 1.png">
+  <img src="./assets/iPhone 13 Pro Max - 1Ao.png">
 </p>
 
 
