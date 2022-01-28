@@ -10,7 +10,7 @@
   <h3 align="center">README</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    React native expo weather app
     <br />
     <a href="https://github.com/AbdifatahOsman2/React_native-Weather_App/tree/main/screens"><strong>Explore the docs »</strong></a>
     <br />
